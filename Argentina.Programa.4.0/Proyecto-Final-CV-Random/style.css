@@ -1,0 +1,90 @@
+* {
+  font-family: "Gowun Dodum", sans-serif;
+}
+
+i {
+  float: right;
+  margin-top: 5px;
+}
+
+p {
+  margin: 15px 0 15px;
+}
+
+.idiomas {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.idiomas li {
+  width: 50%;
+}
+
+.progress {
+  margin-top: 5px;
+  width: 50%;
+}
+
+#image {
+  max-width: 250px;
+}
+
+.sidebar {
+  width: 250px;
+  background-color: darkslategray;
+}
+
+#skills p {
+  margin: 0;
+}
+
+.iconos {
+  margin: auto;
+}
+
+@media (min-width: 446px) and (max-width: 767px) {
+  .flex-nowrap {
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .flex-nowrap div {
+    color: white;
+  }
+
+  #image {
+    margin: auto;
+    width: 100%;
+  }
+
+  #contacto,
+  #idiomas,
+  #habilidades {
+    text-align: center;
+  }
+
+  #idiomas {
+    margin: 0 10px 0 0;
+  }
+
+  #idiomas div {
+    width: 40%;
+  }
+
+  #habilidades li {
+    display: inline-block;
+    margin-left: -80px;
+    width: 70%;
+  }
+
+  #informacion {
+    background-color: darkred;
+  }
+}
+
+@media (max-width: 445px) {
+  #informacion {
+    background-color: darkred;
+    color: white;
+  }
+}
