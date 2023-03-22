@@ -1,0 +1,47 @@
+
+async function fetchItems() {
+  const response = await fetch("https://pokeapi.co/api/v2/item?limit=150");
+  if (!response.ok) {
+    throw new Error(response.statusText);
+  }
+  const results = await response.json();
+  //console.log("results", results.results);
+  
+  //const response2 = await fetch();
+  
+  const items = results.results.map((item) => ({
+    item: item.url,
+  }));
+  return items;
+}
+
+console.log(fetchItems());
+
+//const response = await fetch("https://pokeapi.co/api/v2/item?limit=150");
+
+//-----------------------------------------------
+
+
+async function fetchItems() {
+  const response = await fetch("https://pokeapi.co/api/v2/item?limit=150");
+  if (!response.ok) {
+    throw new Error(response.statusText);
+  }
+  const results = await response.json();
+  //console.log("results", results.results);
+  
+  //const response2 = await fetch();
+  
+  const pokemons = results.results.map((item) => {
+    console.log(item.url);
+  });
+  
+}
+
+fetchItems();
+
+
+
+
+
+
