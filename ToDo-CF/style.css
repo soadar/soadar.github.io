@@ -1,0 +1,95 @@
+* {
+  padding: 0;
+  margin: 0;
+  border: none;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: blueviolet;
+}
+
+h1 {
+  text-align: center;
+  margin: 2rem;
+}
+
+ul {
+  list-style: none;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  overflow: auto;
+}
+
+ul li * {
+  padding-left: 15px;
+  color: red;
+  background-color: inherit;
+}
+
+ul li button {
+  margin: 5px 0 5px;
+  transition: color 0.5s;
+}
+
+ul li button:hover {
+  color: white;
+  transform: scale(1.3);
+}
+
+.listado {
+  width: 80%;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 4em 3em;
+  border-radius: 10px;
+}
+
+.tachado {
+  text-decoration: line-through;
+}
+
+form {
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-around;
+}
+
+input[type="text"] {
+  margin-left: 1rem;
+  width: 60%;
+  font-family: inherit;
+  font-size: 1rem;
+  padding: 0.6em 0.3em;
+  border: none;
+  outline: none;
+  border-radius: 10px;
+}
+
+#submit {
+  margin-left: 1rem;
+  background-color: darkcyan;
+  color: white;
+  font-family: inherit;
+  font-size: 1rem;
+  padding: 0.8em;
+  border: none;
+  border-radius: 0.5em;
+}
+
+.listado {
+  margin: 2em;
+  padding: 0;
+  height: 50vh;
+}
+
+.info {
+  margin: 20px;
+  display: flex;
+  justify-content: space-around;
+  background-color: darkcyan;
+  border-radius: 10px;
+}
