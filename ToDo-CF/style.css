@@ -28,14 +28,19 @@ ul {
 }
 
 ul li * {
-  padding-left: 15px;
+  padding-left: 25px;
   color: red;
   background-color: inherit;
 }
 
 ul li button {
-  margin: 5px 0 5px;
+  margin: 2px 0 2px;
   transition: color 0.5s;
+  font-size: x-large;
+}
+
+li {
+  font-size: x-large;
 }
 
 ul li button:hover {
