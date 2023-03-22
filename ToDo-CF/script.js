@@ -37,7 +37,7 @@ function crearTarea(tarea) {
     button.innerHTML = "x";
 
     button.onclick = () => {
-        button.parentElement.style.display = "none";
+        button.parentElement.remove();
         tasks = tasks.filter((task) => task.id !== parseInt(button.parentNode.id));
         localStorage.setItem("tasks", JSON.stringify(tasks));
     }
