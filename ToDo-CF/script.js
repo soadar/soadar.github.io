@@ -50,7 +50,7 @@ function crearTarea(tarea) {
 document.getElementById("lista").addEventListener('click', (e) => {
     if (e.target.tagName === 'LI') {
         e.target.classList.toggle('tachado');
-        const index = tasks.findIndex(product => product.id === parseInt(e.target.id));
+        const index = tasks.findIndex(task => task.id === parseInt(e.target.id));
         tasks[index].tachado = e.target.className;
     }
     actualizarInfo()
