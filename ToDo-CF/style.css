@@ -7,6 +7,9 @@
 
 body {
   background-color: blueviolet;
+  margin: 0 auto;
+  width: 40%;
+  height: 80%;
 }
 
 h1 {
@@ -83,7 +86,7 @@ input[type="text"] {
 .listado {
   margin: 2em;
   padding: 0;
-  height: 50vh;
+  height: 40vh;
 }
 
 .info {
@@ -92,4 +95,31 @@ input[type="text"] {
   justify-content: space-around;
   background-color: darkcyan;
   border-radius: 10px;
+  min-width: 40vh;
+}
+
+@media (max-width: 768px) {
+  form {
+    display: grid;
+    justify-items: center;
+  }
+  input[type="text"] {
+    width: 100%;
+    margin: 10px;
+  }
+  .listado {
+    height: 30vw;
+  }
+
+  body {
+    background-color: antiquewhite;
+    margin: 0 auto;
+    width: auto;
+    height: auto;
+  }
+
+  .info {
+    max-width: 50vh;
+    margin: 0 auto;
+  }
 }
