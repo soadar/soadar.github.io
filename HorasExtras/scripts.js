@@ -1,10 +1,9 @@
 //Default
 var defaultDatetime = "2020-01-01T19:30:00.000Z"; //'2020-03-29 19:30';
 
-let user = JSON.parse(localStorage.getItem("user")) || [];
+
 let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 
-console.log(user);
 if (localStorage.getItem("tasks")) {
   //console.log(totalHoras)
   tasks.map((task) => {
@@ -17,15 +16,13 @@ if (localStorage.getItem("tasks")) {
   });
   //console.log([totalHoras.hours().toString().padStart(2, '0'), totalHoras.minutes().toString().padStart(2, '0')].join(':'));
 }
+actualizarHoras()
 //console.log(tasks);
-//Guess local timezone
+
 let localTzName = moment.tz.guess();
-//Timezone Select Elements
 let defaultTzEl = $("#selectDefaultTimezone");
 let localTzEl = $("#selectLocalTimezone");
-//Use Moment-based DateTime formatting rather than Javascript
 $.datetimepicker.setDateFormatter("moment");
-//Init the datetimepicker element
 
 $("#pickerDateTime1").datetimepicker({
   timepicker: false,
@@ -37,26 +34,26 @@ $("#pickerDateTime2").datetimepicker({
   datepicker: false,
   value: "09:45",
   maxTime: "09:46",
-  format: "HH:mm", //'dddd MMMM DD, hh:mm A',//'Y-m-d H:i',
+  format: "HH:mm",
   step: 15,
 });
 $("#pickerDateTime3").datetimepicker({
   datepicker: false,
   value: "09:45",
-  format: "HH:mm", //'dddd MMMM DD, hh:mm A',//'Y-m-d H:i',
+  format: "HH:mm",
   step: 15,
 });
 $("#pickerDateTime4").datetimepicker({
   datepicker: false,
   value: "17:15",
-  format: "HH:mm", //'dddd MMMM DD, hh:mm A',//'Y-m-d H:i',
+  format: "HH:mm",
   step: 15,
 });
 $("#pickerDateTime5").datetimepicker({
   datepicker: false,
   minTime: "17:15",
   value: "17:15",
-  format: "HH:mm", //'dddd MMMM DD, hh:mm A',//'Y-m-d H:i',
+  format: "HH:mm",
   step: 15,
 });
 
@@ -94,7 +91,7 @@ document.getElementById("form").addEventListener("submit", function (event) {
   localStorage.setItem("tasks", JSON.stringify(tasks));
   //console.log(JSON.stringify(task));
   crearTarea(task);
-  
+
 });
 
 function crearTarea(tarea) {
@@ -123,17 +120,22 @@ function actualizarHoras() {
   let totalHoras = moment.duration();
   let horas = document.getElementById("horas");
 
-  tasks.map((task) => {
-    totalHoras.add(moment.duration(task.horas.toString()));
-  });
-  if (totalHoras.hours() > 0 || totalHoras.minutes() > 0) {
-    horas.innerHTML = [totalHoras.hours().toString().padStart(2, '0'), totalHoras.minutes().toString().padStart(2, '0')].join(':'); 
-    //horas.style.border = "5px solid lightgreen"
-    //console.log("1")
+  if (localStorage.getItem("tasks")) {
+    tasks.map((task) => {
+      totalHoras.add(moment.duration(task.horas.toString()));
+    });
+    if (totalHoras.hours() > 0 || totalHoras.minutes() > 0) {
+      horas.innerHTML = [totalHoras.hours().toString().padStart(2, '0'), totalHoras.minutes().toString().padStart(2, '0')].join(':');
+      //horas.style.border = "5px solid lightgreen"
+      //console.log("1")
+    } else {
+      horas.innerHTML = '00:00';
+      //console.log("2")
+    }
   } else {
     horas.innerHTML = '00:00';
-    //console.log("2")
   }
+  let user = JSON.parse(localStorage.getItem("user")) || [];
   horas.innerHTML += " - " + user.charAt(0).toUpperCase() + user.slice(1)
 }
 //console.log(totalHoras);
