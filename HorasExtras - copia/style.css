@@ -129,12 +129,3 @@ p {
 .ui-datepicker-week-end > .ui-state-default {
   color: red;
 }
-
-.xdsoft_other_month {
-  color: gray !important;
-  opacity: 0.8;
-}
-
-.xdsoft_date:not(.xdsoft_other_month) {
-  color: black !important;
-}
