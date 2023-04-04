@@ -27,8 +27,9 @@ navbar a {
 }
 
 #portada {
-  margin-top: 50px;
+  margin: 50px auto;
   border: 5px solid black;
+  width: 800px;
 }
 
 #portada img {
