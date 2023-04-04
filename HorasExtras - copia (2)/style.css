@@ -2,11 +2,6 @@
   text-align: center;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
-body {
-  max-width: 90vw;
-  max-height: 90vh;
-  margin: 0px;
-}
 
 body,
 .select-1 {
@@ -14,6 +9,10 @@ body,
     sans-serif;
   font-size: 13px;
   background: #000070;
+}
+
+#hero {
+  height: 100vh;
 }
 
 div {
@@ -76,22 +75,18 @@ input:disabled {
 
 ul {
   list-style: none;
-  width: 100%;
-  margin: 0 auto;
-  display: inline;
+  width: 90%;
 }
-
 li {
+  width: 100%;
   color: lightgray;
   font-weight: bold;
-  padding-left: 50px;
 }
 
 #listado {
-  width: 95%;
+  width: 90%;
   height: 400px;
   overflow: auto;
-  margin: 0;
 }
 
 .btnX {
@@ -142,13 +137,4 @@ p {
 
 .xdsoft_date:not(.xdsoft_other_month) {
   color: black !important;
-}
-
-#labels {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-}
-
-#salida {
-  margin-right: -50px;
 }
