@@ -1,13 +1,12 @@
 * {
-  box-sizing: border-box;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 body {
-  margin: 0 auto;
-  width: 80%;
 }
 
 navbar {
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: end;
@@ -29,7 +28,8 @@ navbar a {
 #portada {
   margin: 50px auto;
   border: 5px solid black;
-  width: 800px;
+  width: 700px;
+  margin: 20px auto;
 }
 
 #portada img {
@@ -38,10 +38,11 @@ navbar a {
 }
 
 #ofertas {
-  margin-top: 50px;
+  margin: 50px auto;
   display: flex;
+  flex-wrap: wrap;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
 }
 
