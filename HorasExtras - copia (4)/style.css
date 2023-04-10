@@ -70,7 +70,7 @@ input:disabled {
   background: #ddd;
   border-radius: 1rem;
   box-shadow: gray 0 0.4rem 1rem;
-  width: 1000px;
+  width: 600px;
   margin: 0 auto;
 }
 
@@ -146,39 +146,9 @@ p {
 
 #labels {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-}
-
-#fecha {
-  margin-left: -50px;
-}
-
-#ingreso {
-  margin-left: -50px;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 }
 
 #salida {
-  margin-left: 14px;
-}
-
-#motivo {
-  margin-left: 80px;
-}
-
-#prefijoSelect {
-  margin-left: -100px;
-}
-
-.select-3 {
-  /* 	width: 100%; */
-  max-width: 100%;
-  box-sizing: border-box;
-  border: 1px solid #aaa;
-  box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.04);
-  border-radius: 0.5em;
-  -moz-appearance: none;
-  -webkit-appearance: none;
-  appearance: none;
-  background-color: #fff;
-  vertical-align: middle;
+  margin-right: -50px;
 }
