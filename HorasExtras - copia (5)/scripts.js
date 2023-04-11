@@ -139,9 +139,10 @@ function crearTarea(tarea) {
   const li = document.createElement("li");
   //console.log(Math.floor(tarea.horas / 4));
   li.innerHTML = `
-    ${tarea.dia} - ${tarea.horas} hs - ${tarea.prefijo} - ${tarea.motivo} 
-  `;
-  //- cenas: ${Math.floor(tarea.horas.substring(0, 2) / 4)}
+    ${tarea.dia} - ${tarea.horas} hs - ${tarea.prefijo} - ${
+    tarea.motivo
+  } - cenas: ${Math.floor(tarea.horas.substring(0, 2) / 4)};
+    `;
 
   li.id = tarea.id;
   let lista = document.getElementById("lista");
@@ -159,7 +160,7 @@ function crearTarea(tarea) {
   lista.appendChild(li);
   form.reset();
   actualizarHoras();
-  //console.log(tarea.horas.substring(0, 2));
+  console.log(tarea.horas.substring(0, 2));
 }
 
 let totalHoras = moment.duration();
@@ -173,15 +174,20 @@ function actualizarHoras() {
       totalHoras.add(moment.duration(task.horas.toString()));
       //console.log(task);
     });
-    divhoras.innerHTML = [
-      totalHoras.hours().toString().padStart(2, "0"),
-      totalHoras.minutes().toString().padStart(2, "0"),
-    ].join(":");
+    if (totalHoras.hours() > 0 || totalHoras.minutes() > 0) {
+      divhoras.innerHTML = [
+        totalHoras.hours().toString().padStart(2, "0"),
+        totalHoras.minutes().toString().padStart(2, "0"),
+      ].join(":");
+      //horas.style.border = "5px solid lightgreen"
+      //console.log("1")
+    } else {
+      divhoras.innerHTML = "00:00";
+      //console.log("2")
+    }
   } else {
     divhoras.innerHTML = "00:00";
   }
-  divhoras.innerHTML += ` - ${
-    user.charAt(0).toUpperCase() + user.slice(1)
-  } - Cenas: ${Math.floor(totalHoras.hours() / 4)}`;
+  divhoras.innerHTML += " - " + user.charAt(0).toUpperCase() + user.slice(1);
 }
 //console.log(totalHoras);
