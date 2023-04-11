@@ -16,6 +16,7 @@ if (localStorage.getItem("horas")) {
     crearTarea(task);
   });
 }
+
 //console.log(tasks);
 
 let localTzName = moment.tz.guess();
@@ -135,8 +136,13 @@ let prefijo = document.getElementById("prefijo");
 //})
 
 function crearTarea(tarea) {
+
   const li = document.createElement("li");
-  li.innerHTML = tarea.dia + " - " + tarea.horas + " hs";
+  //console.log(Math.floor(tarea.horas / 4));
+  li.innerHTML = `
+    ${tarea.dia} - ${tarea.horas} hs - ${tarea.prefijo} - ${tarea.motivo} - cenas: ${Math.floor(tarea.horas.substring(0, 2) / 4)};
+    `
+
   li.id = tarea.id;
   let lista = document.getElementById("lista");
   const button = document.createElement("button");
@@ -153,7 +159,7 @@ function crearTarea(tarea) {
   lista.appendChild(li);
   form.reset();
   actualizarHoras();
-  console.log(tarea);
+  console.log(tarea.horas.substring(0, 2));
 }
 
 let totalHoras = moment.duration();
