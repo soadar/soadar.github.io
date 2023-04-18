@@ -1,135 +1,131 @@
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login</title>
-  </head>
 
-  <body>
-    <form id="login">
-      <div class="inputs">
-        <input
-          id="username"
-          name="username"
-          class="required"
-          type="text"
-          placeholder=" "
-        />
-        <label> Usuario </label>
-      </div>
-      <div>
-        <button>Submit</button>
-      </div>
-    </form>
-    <script>
-      document
-        .getElementById("login")
-        .addEventListener("submit", function (event) {
-          event.preventDefault();
-          localStorage.setItem(
-            "user",
-            JSON.stringify(document.getElementById("username").value)
-          );
-          window.location.replace("index2.html");
-          //window.location.href = "index.html";
-        });
-    </script>
-  </body>
-  <style>
-    body {
-      background: #000070;
-    }
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login</title>
+</head>
 
-    form {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: rgba(0, 0, 0, 0.1);
-      padding: 100px;
-    }
+<body>
+  <form id="login">
+    <div class="inputs">
+      <input id="username" name="username" class="required" type="text" placeholder=" " />
+      <label> Usuario </label>
+    </div>
+    <div>
+      <button>Submit</button>
+    </div>
+  </form>
+  <script>
+    document
+      .getElementById("login")
+      .addEventListener("submit", function (event) {
+        event.preventDefault();
+        localStorage.setItem(
+          "user",
+          JSON.stringify(document.getElementById("username").value)
+        );
+        window.location.replace("index2.html");
+        //window.location.href = "index.html";
+      });
+  </script>
+</body>
+<style>
+  body {
+    background: #000070;
+  }
 
-    label {
-      font-family: sans-serif;
-      text-transform: uppercase;
-      font-size: 0.8em;
-      color: #fff;
-    }
+  form {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.1);
+    padding: 100px;
+  }
 
-    input[type="text"]:focus {
-      background: none;
-      border: none;
-      color: #fff;
-    }
+  label {
+    font-family: sans-serif;
+    text-transform: uppercase;
+    font-size: 0.8em;
+    color: #fff;
+  }
 
-    button {
-      background: transparent;
-      color: #fff;
-      font-family: sans-serif;
-      text-transform: uppercase;
-      letter-spacing: 3px;
-      width: 100%;
-      margin: 20px auto;
-      padding: 20px 30px;
-      border: 2px solid #fff;
-    }
+  input[type="text"]:focus {
+    background: none;
+    border: none;
+    color: #fff;
+  }
 
-    button:hover {
-      background: transparent;
-      border: 2px solid greenyellow;
-    }
+  button {
+    background: transparent;
+    color: #fff;
+    font-family: sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    width: 100%;
+    margin: 20px auto;
+    padding: 20px 30px;
+    border: 2px solid #fff;
+  }
 
-    /* sss */
+  button:hover {
+    background: transparent;
+    border: 2px solid greenyellow;
+  }
 
-    .inputs {
-      margin: 0;
-      position: relative;
-      float: left;
-      width: 100%;
-      box-sizing: border-box;
-      padding-bottom: 10px;
-    }
+  /* sss */
 
-    .inputs.half {
-      width: 50%;
-    }
+  .inputs {
+    margin: 0;
+    position: relative;
+    float: left;
+    width: 100%;
+    box-sizing: border-box;
+    padding-bottom: 10px;
+  }
 
-    .inputs input {
-      width: 100%;
-      /* padding: 20px 0px 4px 0px; */
-      background: transparent;
-      box-sizing: border-box;
-      border-color: #aaa;
-      border-width: 0px 0px 2px 0px;
-      color: white;
-      outline: none;
-      transition: all 0.3s;
-      padding: 0px 15x;
-    }
+  .inputs.half {
+    width: 50%;
+  }
 
-    .inputs input + label:after {
-      content: " ";
-    }
+  .inputs input {
+    width: 100%;
+    /* padding: 20px 0px 4px 0px; */
+    background: transparent;
+    box-sizing: border-box;
+    border-color: #aaa;
+    border-width: 0px 0px 2px 0px;
+    color: white;
+    outline: none;
+    transition: all 0.3s;
+    padding: 0px 15x;
+  }
 
-    .inputs input:placeholder-shown + label {
-      color: #999;
-      left: 14px;
-      bottom: -8px;
-    }
+  .inputs input+label:after {
+    content: " ";
+  }
 
-    .inputs input:focus + label,
-    .inputs input + label {
-      position: absolute;
-      bottom: 14px;
-      left: 10px;
-      color: #999;
-      line-height: 60px;
-      pointer-events: none;
-      transition: all 0.25s;
-      font-size: 14px;
-    }
-    /* input:-webkit-autofill,
+  .inputs input:placeholder-shown+label {
+    color: #999;
+    left: 14px;
+    bottom: -8px;
+  }
+
+  .inputs input:focus+label,
+  .inputs input+label {
+    position: absolute;
+    bottom: 14px;
+    left: 10px;
+    color: #999;
+    line-height: 60px;
+    pointer-events: none;
+    transition: all 0.25s;
+    font-size: 14px;
+  }
+
+  /* input:-webkit-autofill,
     input:-webkit-autofill:hover,
     input:-webkit-autofill:focus,
     textarea:-webkit-autofill,
@@ -143,18 +139,19 @@
       -webkit-box-shadow: 0 0 0px 1000px #000 inset;
       transition: background-color 5000s ease-in-out 0s;
     } */
-    input:-webkit-autofill,
-    input:-webkit-autofill:hover,
-    input:-webkit-autofill:focus,
-    textarea:-webkit-autofill,
-    textarea:-webkit-autofill:hover,
-    textarea:-webkit-autofill:focus,
-    select:-webkit-autofill,
-    select:-webkit-autofill:hover,
-    select:-webkit-autofill:focus {
-      -webkit-text-fill-color: white;
-      -webkit-box-shadow: 0 0 0px 1000px transparent inset;
-      transition: background-color 5000s ease-in-out 0s;
-    }
-  </style>
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  textarea:-webkit-autofill,
+  textarea:-webkit-autofill:hover,
+  textarea:-webkit-autofill:focus,
+  select:-webkit-autofill,
+  select:-webkit-autofill:hover,
+  select:-webkit-autofill:focus {
+    -webkit-text-fill-color: white;
+    -webkit-box-shadow: 0 0 0px 1000px transparent inset;
+    transition: background-color 5000s ease-in-out 0s;
+  }
+</style>
+
 </html>
