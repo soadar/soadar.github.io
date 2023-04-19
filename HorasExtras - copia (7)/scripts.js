@@ -18,6 +18,8 @@ if (localStorage.getItem("horas")) {
 }
 
 let localTzName = moment.tz.guess();
+let defaultTzEl = $("#selectDefaultTimezone");
+let localTzEl = $("#selectLocalTimezone");
 $.datetimepicker.setDateFormatter("moment");
 
 $("#pickerDateTime1").datetimepicker({
@@ -79,14 +81,30 @@ document.getElementById("form").addEventListener("submit", function (event) {
   var HoraExtraSalida = moment($("#pickerDateTime5").val(), "HH:mm");
 
   var diffStart = moment.duration(HoraEntrada.diff(HoraExtraEntrada));
-  diffTotalStart = horas(diffStart)
+  diffTotalStart = [
+    diffStart.hours().toString().padStart(2, "0"),
+    diffStart.minutes().toString().padStart(2, "0"),
+  ].join(":");
+  //console.log(diffTotalStart);
 
   var diffEnd = moment.duration(HoraExtraSalida.diff(HoraSalida));
-  diffTotalEnd = horas(diffEnd)
+  diffTotalEnd = [
+    diffEnd.hours().toString().padStart(2, "0"),
+    diffEnd.minutes().toString().padStart(2, "0"),
+  ].join(":");
+  //console.log(diffTotalEnd);
 
   diffTotal = diffStart.add(diffTotalEnd);
-  diffTotalTotal = horas(diffTotal)
+  //console.log(diffTotal);
 
+  diffTotalTotal = [
+    diffTotal.hours().toString().padStart(2, "0"),
+    diffTotal.minutes().toString().padStart(2, "0"),
+  ].join(":");
+
+  //let select = document.createElement('motivoArea');
+  //
+  //console.log(HoraExtraEntrada._i)
   if (diffTotalTotal != "00:00") {
     const task = {
       id: new Date().getTime(),
@@ -98,10 +116,17 @@ document.getElementById("form").addEventListener("submit", function (event) {
       prefijo: prefijo.options[prefijo.selectedIndex].text,
     };
     tasks.push(task);
+    //console.log(task);
     localStorage.setItem("horas", JSON.stringify(tasks));
-    crearTarea();
+    //console.log(JSON.stringify(task));
+    crearTarea(task);
   }
 });
+
+function crearTarea(tarea) {
+  renderizarLista(crearTabla(tasks), document.getElementById("divLista"));
+  actualizarHoras()
+}
 
 let totalHoras = moment.duration();
 
@@ -112,25 +137,17 @@ function actualizarHoras() {
   if (localStorage.getItem("horas")) {
     tasks.map((task) => {
       totalHoras.add(moment.duration(task.horas.toString()));
+      //console.log(task);
     });
-    divhoras.innerHTML = horas(totalHoras)
+    divhoras.innerHTML = [
+      totalHoras.hours().toString().padStart(2, "0"),
+      totalHoras.minutes().toString().padStart(2, "0"),
+    ].join(":");
   } else {
     divhoras.innerHTML = "00:00";
   }
   divhoras.innerHTML += ` - ${user.charAt(0).toUpperCase() + user.slice(1)
     } - Cenas: ${Math.floor(totalHoras.hours() / 4)}`;
-}
-
-function horas(tiempo) {
-  return [
-    tiempo.hours().toString().padStart(2, "0"),
-    tiempo.minutes().toString().padStart(2, "0"),
-  ].join(":");
-}
-
-function crearTarea() {
-  renderizarLista(crearTabla(tasks), document.getElementById("divLista"));
-  actualizarHoras()
 }
 
 ////////////////////////////////////////////////////////
@@ -156,7 +173,7 @@ function crearTabla(items) {
 function crearThead(item) {
   const thead = document.createElement("thead");
   const tr = document.createElement("tr");
-  tr.style.backgroundColor = "purple";
+  tr.style.backgroundColor = "blue";
 
   for (const key in item) {
     if (key !== "id") {
@@ -179,6 +196,8 @@ function crearTbody(items) {
       }
       else {
         const td = document.createElement("td");
+        // td.style.setProperty("border", "1px solid black");
+        // td.style.border = "1px solid black";
         td.textContent = item[key];
         tr.appendChild(td);
       }
@@ -200,20 +219,31 @@ function crearTbody(items) {
 }
 
 
-function downloadXLSX(type, fn, dl) {
+function ExportToExcel(type, fn, dl) {
   var elt = document.getElementById('tablax');
-  var wb = XLSX.utils.table_to_book(elt, { sheet: "Libro1" });
+  var wb = XLSX.utils.table_to_book(elt, { sheet: "sheet1" });
   return dl ?
     XLSX.write(wb, { bookType: type, bookSST: true, type: 'base64' }) :
-    XLSX.writeFile(wb, fn || ('Horas_Extras.' + (type || 'xlsx')));
+    XLSX.writeFile(wb, fn || ('MySheetName.' + (type || 'xlsx')));
 }
 
 document.querySelector('#toexcel').addEventListener('click', () => {
-  downloadXLSX('xlsx');
+  ExportToExcel('xlsx');
+})
+
+function ExportToJson() {
+  var fileToSave = new Blob([JSON.stringify(tasks)], {
+    type: 'application/json'
+  });
+  saveAs(fileToSave, 'horas.json');
+}
+
+document.querySelector('#tojson').addEventListener('click', () => {
+  onDownload();
 })
 
 
-function downloadJson(content, fileName, contentType) {
+function download(content, fileName, contentType) {
   const a = document.createElement("a");
   const file = new Blob([content], { type: contentType });
   a.href = URL.createObjectURL(file);
@@ -221,26 +251,47 @@ function downloadJson(content, fileName, contentType) {
   a.click();
 }
 
+function onDownload() {
+  download(JSON.stringify(tasks), "yourfile.json", "text/json");
+}
 
-document.querySelector('#tojson').addEventListener('click', () => {
-  downloadJson(JSON.stringify(tasks), "json.json", "text/json");
-})
 
-function downloadPDF() {
-  var doc = new jsPDF('p', 'pt', 'letter');
-  var res = doc.autoTableHtmlToJson(document.getElementById("tablax"));
+var specialElementHandlers = {
+  // element with id of "bypass" - jQuery style selector
+  '.no-export': function (element, renderer) {
+    // true = "handled elsewhere, bypass text extraction"
+    return true;
+  }
+};
 
-  doc.autoTable(res.columns, res.data, {
-    styles: { halign: 'center' },
-    margin: { top: 80 },
-    beforePageContent: function (data) {
-      doc.text("Horas Extras", 40, 50);
-    }
-  });
-  doc.save("table.pdf");
+function exportPDF(id) {
+  var doc = new jsPDF('p', 'pt', 'a4');
+  var source = document.getElementById(id);
+  var margins = {
+    top: 10,
+    bottom: 10,
+    left: 10,
+    width: 595
+  };
+
+  doc.fromHTML(
+    source, // HTML string or DOM elem ref.
+    margins.left,
+    margins.top, {
+    'width': margins.width,
+    'elementHandlers': specialElementHandlers
+  },
+
+    function (dispose) {
+      doc.save('Test.pdf');
+    }, margins);
 }
 
 document.querySelector('#topdf').addEventListener('click', () => {
-  downloadPDF()
+  let pdf = new jsPDF('p', 'pt', 'letter');
+  pdf.html(document.getElementById('tablax'), {
+    callback: function (pdf) {
+      pdf.save('test.pdf');
+    }
+  });
 })
-

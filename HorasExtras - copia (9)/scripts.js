@@ -78,14 +78,29 @@ document.getElementById("form").addEventListener("submit", function (event) {
   var HoraSalida = moment($("#pickerDateTime4").val(), "HH:mm");
   var HoraExtraSalida = moment($("#pickerDateTime5").val(), "HH:mm");
 
+  // console.log(HoraSalida.diff(HoraEntrada));
+  // console.log(moment.duration(HoraSalida.diff(HoraEntrada)));
+  // console.log(moment.duration(HoraSalida.diff(HoraEntrada)).hours());
+  // console.log(moment.duration(HoraSalida.diff(HoraEntrada)).minutes());
+  // console.log(moment.duration(HoraSalida.diff(HoraEntrada)).format("hh:mm"));
+
   var diffStart = moment.duration(HoraEntrada.diff(HoraExtraEntrada));
-  diffTotalStart = horas(diffStart)
+  diffTotalStart = [
+    diffStart.hours().toString().padStart(2, "0"),
+    diffStart.minutes().toString().padStart(2, "0"),
+  ].join(":");
 
   var diffEnd = moment.duration(HoraExtraSalida.diff(HoraSalida));
-  diffTotalEnd = horas(diffEnd)
-
+  diffTotalEnd = [
+    diffEnd.hours().toString().padStart(2, "0"),
+    diffEnd.minutes().toString().padStart(2, "0"),
+  ].join(":");
   diffTotal = diffStart.add(diffTotalEnd);
-  diffTotalTotal = horas(diffTotal)
+
+  diffTotalTotal = [
+    diffTotal.hours().toString().padStart(2, "0"),
+    diffTotal.minutes().toString().padStart(2, "0"),
+  ].join(":");
 
   if (diffTotalTotal != "00:00") {
     const task = {
@@ -98,10 +113,17 @@ document.getElementById("form").addEventListener("submit", function (event) {
       prefijo: prefijo.options[prefijo.selectedIndex].text,
     };
     tasks.push(task);
+    //console.log(task);
     localStorage.setItem("horas", JSON.stringify(tasks));
-    crearTarea();
+    //console.log(JSON.stringify(task));
+    crearTarea(task);
   }
 });
+
+function crearTarea(tarea) {
+  renderizarLista(crearTabla(tasks), document.getElementById("divLista"));
+  actualizarHoras()
+}
 
 let totalHoras = moment.duration();
 
@@ -112,25 +134,17 @@ function actualizarHoras() {
   if (localStorage.getItem("horas")) {
     tasks.map((task) => {
       totalHoras.add(moment.duration(task.horas.toString()));
+      //console.log(task);
     });
-    divhoras.innerHTML = horas(totalHoras)
+    divhoras.innerHTML = [
+      totalHoras.hours().toString().padStart(2, "0"),
+      totalHoras.minutes().toString().padStart(2, "0"),
+    ].join(":");
   } else {
     divhoras.innerHTML = "00:00";
   }
   divhoras.innerHTML += ` - ${user.charAt(0).toUpperCase() + user.slice(1)
     } - Cenas: ${Math.floor(totalHoras.hours() / 4)}`;
-}
-
-function horas(tiempo) {
-  return [
-    tiempo.hours().toString().padStart(2, "0"),
-    tiempo.minutes().toString().padStart(2, "0"),
-  ].join(":");
-}
-
-function crearTarea() {
-  renderizarLista(crearTabla(tasks), document.getElementById("divLista"));
-  actualizarHoras()
 }
 
 ////////////////////////////////////////////////////////
@@ -179,6 +193,8 @@ function crearTbody(items) {
       }
       else {
         const td = document.createElement("td");
+        // td.style.setProperty("border", "1px solid black");
+        // td.style.border = "1px solid black";
         td.textContent = item[key];
         tr.appendChild(td);
       }
@@ -243,4 +259,3 @@ function downloadPDF() {
 document.querySelector('#topdf').addEventListener('click', () => {
   downloadPDF()
 })
-
