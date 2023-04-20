@@ -78,13 +78,13 @@ document.getElementById("form").addEventListener("submit", function (event) {
   var HoraExtraSalida = moment($("#pickerDateTime5").val(), "HH:mm");
 
   var diffStart = moment.duration(HoraEntrada.diff(HoraExtraEntrada));
-  diffTotalStart = horas(diffStart)
+  diffTotalStart = horas(diffStart);
 
   var diffEnd = moment.duration(HoraExtraSalida.diff(HoraSalida));
-  diffTotalEnd = horas(diffEnd)
+  diffTotalEnd = horas(diffEnd);
 
   diffTotal = diffStart.add(diffTotalEnd);
-  diffTotalTotal = horas(diffTotal)
+  diffTotalTotal = horas(diffTotal);
 
   if (diffTotalTotal != "00:00") {
     const task = {
@@ -99,6 +99,8 @@ document.getElementById("form").addEventListener("submit", function (event) {
     tasks.push(task);
     localStorage.setItem("horas", JSON.stringify(tasks));
     crearTarea();
+  } else {
+    alert("No se registraron horas extras.");
   }
 });
 
@@ -112,12 +114,13 @@ function actualizarHoras() {
     tasks.map((task) => {
       totalHoras.add(moment.duration(task.horas.toString()));
     });
-    divhoras.innerHTML = horas(totalHoras)
+    divhoras.innerHTML = horas(totalHoras);
   } else {
     divhoras.innerHTML = "00:00";
   }
-  divhoras.innerHTML += ` - ${user.charAt(0).toUpperCase() + user.slice(1)
-    } - Cenas: ${Math.floor(totalHoras.hours() / 4)}`;
+  divhoras.innerHTML += ` - ${
+    user.charAt(0).toUpperCase() + user.slice(1)
+  } - Cenas: ${Math.floor(totalHoras.hours() / 4)}`;
 }
 
 function horas(tiempo) {
@@ -129,7 +132,7 @@ function horas(tiempo) {
 
 function crearTarea() {
   renderizarLista(crearTabla(tasks), document.getElementById("divLista"));
-  actualizarHoras()
+  actualizarHoras();
 }
 
 ////////////////////////////////////////////////////////
@@ -138,19 +141,17 @@ function renderizarLista(lista, contenedor) {
   while (contenedor.hasChildNodes()) {
     contenedor.removeChild(contenedor.firstChild);
   }
-  if (lista)
-    contenedor.appendChild(lista);
+  if (lista) contenedor.appendChild(lista);
 }
 
 function crearTabla(items) {
   const tabla = document.createElement("table");
-  tabla.id = 'tablax'
+  tabla.id = "tablax";
   tabla.appendChild(crearThead(items[0]));
   tabla.appendChild(crearTbody(items));
   //tabla.setAttribute("style", "border:1px solid black; border-collapse:collapse");
   return tabla;
 }
-
 
 function crearThead(item) {
   const thead = document.createElement("thead");
@@ -170,13 +171,12 @@ function crearThead(item) {
 
 function crearTbody(items) {
   const tbody = document.createElement("tbody");
-  items.forEach(item => {
+  items.forEach((item) => {
     const tr = document.createElement("tr");
     for (const key in item) {
       if (key === "id") {
         tr.setAttribute("id", item[key]);
-      }
-      else {
+      } else {
         const td = document.createElement("td");
         td.textContent = item[key];
         tr.appendChild(td);
@@ -188,7 +188,9 @@ function crearTbody(items) {
     button.classList = "btnX";
     button.onclick = () => {
       button.parentElement.remove();
-      tasks = tasks.filter((task) => task.id !== parseInt(button.parentNode.id));
+      tasks = tasks.filter(
+        (task) => task.id !== parseInt(button.parentNode.id)
+      );
       localStorage.setItem("horas", JSON.stringify(tasks));
       actualizarHoras();
     };
@@ -198,19 +200,17 @@ function crearTbody(items) {
   return tbody;
 }
 
-
 function downloadXLSX(type, fn, dl) {
-  var elt = document.getElementById('tablax');
+  var elt = document.getElementById("tablax");
   var wb = XLSX.utils.table_to_book(elt, { sheet: "Libro1" });
-  return dl ?
-    XLSX.write(wb, { bookType: type, bookSST: true, type: 'base64' }) :
-    XLSX.writeFile(wb, fn || ('Horas_Extras.' + (type || 'xlsx')));
+  return dl
+    ? XLSX.write(wb, { bookType: type, bookSST: true, type: "base64" })
+    : XLSX.writeFile(wb, fn || "Horas_Extras." + (type || "xlsx"));
 }
 
-document.querySelector('#toexcel').addEventListener('click', () => {
-  downloadXLSX('xlsx');
-})
-
+document.querySelector("#toexcel").addEventListener("click", () => {
+  downloadXLSX("xlsx");
+});
 
 function downloadJson(content, fileName, contentType) {
   const a = document.createElement("a");
@@ -220,41 +220,40 @@ function downloadJson(content, fileName, contentType) {
   a.click();
 }
 
-
-document.querySelector('#tojson').addEventListener('click', () => {
+document.querySelector("#tojson").addEventListener("click", () => {
   downloadJson(JSON.stringify(tasks), "json.json", "text/json");
-})
+});
 
 function downloadPDF() {
-  var doc = new jsPDF('p', 'pt', 'letter');
+  var doc = new jsPDF("p", "pt", "letter");
   var res = doc.autoTableHtmlToJson(document.getElementById("tablax"));
 
   doc.autoTable(res.columns, res.data, {
-    styles: { halign: 'center' },
+    styles: { halign: "center" },
     margin: { top: 80 },
     beforePageContent: function (data) {
       doc.text("Horas Extras", 40, 50);
-    }
+    },
   });
   doc.save("table.pdf");
 }
 
-document.querySelector('#topdf').addEventListener('click', () => {
-  downloadPDF()
-})
+document.querySelector("#topdf").addEventListener("click", () => {
+  downloadPDF();
+});
 
-var prueba = new Tarea;
+var prueba = new Tarea();
 console.log(prueba.diferenciaNoche());
 console.log(prueba.diferenciaTemprano());
 console.log(prueba.diferenciaTotal());
 
 //function Tarea(fecha, horaEntrada, horaSalida, motivo, prefijo) {
 function Tarea() {
-  var fecha = document.querySelector('#pickerDateTime1').value;
-  var horaExtraEntrada = document.querySelector('#pickerDateTime2').value;
-  var horaEntrada = document.querySelector('#pickerDateTime3').value;
-  var horaSalida = document.querySelector('#pickerDateTime4').value;
-  var horaExtraSalida = document.querySelector('#pickerDateTime5').value;
+  var fecha = document.querySelector("#pickerDateTime1").value;
+  var horaExtraEntrada = document.querySelector("#pickerDateTime2").value;
+  var horaEntrada = document.querySelector("#pickerDateTime3").value;
+  var horaSalida = document.querySelector("#pickerDateTime4").value;
+  var horaExtraSalida = document.querySelector("#pickerDateTime5").value;
   var motivo = document.getElementById("motivoArea").value;
   //var prefijo = prefijo.options[prefijo.selectedIndex].text;
 
@@ -266,13 +265,11 @@ function Tarea() {
   this.motivo = motivo;
   this.prefijo = prefijo;
 
-
   this.diferenciaTemprano = function () {
     var extra = moment(horaExtraEntrada, "HH:mm");
     var entrada = moment(horaEntrada, "HH:mm");
     return horas(moment.duration(entrada.diff(extra)));
   };
-
 
   this.diferenciaNoche = function () {
     var extra = moment(horaExtraSalida, "HH:mm");
@@ -280,10 +277,9 @@ function Tarea() {
     return horas(moment.duration(extra.diff(salida)));
   };
 
-
   this.diferenciaTotal = function () {
     var totalNoche = moment(this.diferenciaNoche(), "HH:mm");
     var totalTemprano = moment(this.diferenciaTemprano(), "HH:mm");
-    return horas(moment.duration(totalTemprano._i).add(totalNoche._i))
+    return horas(moment.duration(totalTemprano._i).add(totalNoche._i));
   };
 }
