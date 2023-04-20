@@ -70,6 +70,7 @@ $("#pickerDateTime5").datetimepicker({
 
 document.getElementById("form").addEventListener("submit", function (event) {
   event.preventDefault();
+  //console.log(event.target)
   var fecha = moment($("#pickerDateTime1").val(), "DD-MM-YYYY");
 
   var HoraExtraEntrada = moment($("#pickerDateTime2").val(), "HH:mm");
@@ -243,47 +244,3 @@ document.querySelector('#topdf').addEventListener('click', () => {
   downloadPDF()
 })
 
-var prueba = new Tarea;
-console.log(prueba.diferenciaNoche());
-console.log(prueba.diferenciaTemprano());
-console.log(prueba.diferenciaTotal());
-
-//function Tarea(fecha, horaEntrada, horaSalida, motivo, prefijo) {
-function Tarea() {
-  var fecha = document.querySelector('#pickerDateTime1').value;
-  var horaExtraEntrada = document.querySelector('#pickerDateTime2').value;
-  var horaEntrada = document.querySelector('#pickerDateTime3').value;
-  var horaSalida = document.querySelector('#pickerDateTime4').value;
-  var horaExtraSalida = document.querySelector('#pickerDateTime5').value;
-  var motivo = document.getElementById("motivoArea").value;
-  //var prefijo = prefijo.options[prefijo.selectedIndex].text;
-
-  this.id = new Date().getTime();
-  this.dia = fecha;
-  this.horas = this.total;
-  this.horaEntrada = horaEntrada;
-  this.horaSalida = horaSalida;
-  this.motivo = motivo;
-  this.prefijo = prefijo;
-
-
-  this.diferenciaTemprano = function () {
-    var extra = moment(horaExtraEntrada, "HH:mm");
-    var entrada = moment(horaEntrada, "HH:mm");
-    return horas(moment.duration(entrada.diff(extra)));
-  };
-
-
-  this.diferenciaNoche = function () {
-    var extra = moment(horaExtraSalida, "HH:mm");
-    var salida = moment(horaSalida, "HH:mm");
-    return horas(moment.duration(extra.diff(salida)));
-  };
-
-
-  this.diferenciaTotal = function () {
-    var totalNoche = moment(this.diferenciaNoche(), "HH:mm");
-    var totalTemprano = moment(this.diferenciaTemprano(), "HH:mm");
-    return horas(moment.duration(totalTemprano._i).add(totalNoche._i))
-  };
-}
