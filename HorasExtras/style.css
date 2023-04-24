@@ -207,3 +207,7 @@ td {
 .boton:hover {
   background-color: orange;
 }
+
+#botones {
+  margin-top: 20px;
+}

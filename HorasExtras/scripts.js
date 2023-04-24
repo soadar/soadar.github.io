@@ -20,26 +20,31 @@ if (localStorage.getItem("horas")) {
 let localTzName = moment.tz.guess();
 $.datetimepicker.setDateFormatter("moment");
 
+
 $("#pickerDateTime1").datetimepicker({
   timepicker: false,
+  format: "DD-MM-YYYY",
   value: new Date(),
-  format: "DD-MM-YYYY", //'dddd MMMM DD, hh:mm A',//'Y-m-d H:i',
   step: 15,
-  months: [
-    "Enero",
-    "Febrero",
-    "Marzo",
-    "Abril",
-    "Mayo",
-    "Junio",
-    "Julio",
-    "Agosto",
-    "Septiembre",
-    "Octubre",
-    "Noviembre",
-    "Diciembre",
-  ],
-  dayOfWeek: ["Dom.", "Lun", "Mar", "Mier", "Jue", "Vier", "Sab"],
+  language: 'es',
+  locale: 'es',
+  minDate: '01-01-2023', formatDate: 'DD-MM-YYYY',
+  startDate: '01-01-2023', formatDate: 'DD-MM-YYYY',
+  // months: [
+  //   "Enero",
+  //   "Febrero",
+  //   "Marzo",
+  //   "Abril",
+  //   "Mayo",
+  //   "Junio",
+  //   "Julio",
+  //   "Agosto",
+  //   "Septiembre",
+  //   "Octubre",
+  //   "Noviembre",
+  //   "Diciembre",
+  // ],
+  // dayOfWeek: ["Dom.", "Lun", "Mar", "Mier", "Jue", "Vier", "Sab"],
 });
 $("#pickerDateTime2").datetimepicker({
   datepicker: false,
@@ -49,12 +54,14 @@ $("#pickerDateTime2").datetimepicker({
   step: 15,
 });
 $("#pickerDateTime3").datetimepicker({
+  timepicker: false,
   datepicker: false,
   value: "09:45",
   format: "HH:mm",
   step: 15,
 });
 $("#pickerDateTime4").datetimepicker({
+  timepicker: false,
   datepicker: false,
   value: "17:15",
   format: "HH:mm",
@@ -70,41 +77,20 @@ $("#pickerDateTime5").datetimepicker({
 
 document.getElementById("form").addEventListener("submit", function (event) {
   event.preventDefault();
-  var fecha = moment($("#pickerDateTime1").val(), "DD-MM-YYYY");
 
-  var HoraExtraEntrada = moment($("#pickerDateTime2").val(), "HH:mm");
-  var HoraEntrada = moment($("#pickerDateTime3").val(), "HH:mm");
-  var HoraSalida = moment($("#pickerDateTime4").val(), "HH:mm");
-  var HoraExtraSalida = moment($("#pickerDateTime5").val(), "HH:mm");
+  const tarea = new Tarea();
+  var horas = tarea.diferenciaTotal();
+  tarea.horas = horas;
 
-  var diffStart = moment.duration(HoraEntrada.diff(HoraExtraEntrada));
-  diffTotalStart = horas(diffStart);
 
-  var diffEnd = moment.duration(HoraExtraSalida.diff(HoraSalida));
-  diffTotalEnd = horas(diffEnd);
-
-  diffTotal = diffStart.add(diffTotalEnd);
-  diffTotalTotal = horas(diffTotal);
-
-  if (diffTotalTotal != "00:00") {
-    const task = {
-      id: new Date().getTime(),
-      dia: fecha._i,
-      horas: diffTotalTotal,
-      horaEntrada: HoraExtraEntrada._i,
-      horaSalida: HoraExtraSalida._i,
-      motivo: document.getElementById("motivoArea").value,
-      prefijo: prefijo.options[prefijo.selectedIndex].text,
-    };
-    tasks.push(task);
+  if (horas != "00:00") {
+    tasks.push(tarea);
     localStorage.setItem("horas", JSON.stringify(tasks));
     crearTarea();
   } else {
     alert("No se registraron horas extras.");
   }
 });
-
-let totalHoras = moment.duration();
 
 function actualizarHoras() {
   let totalHoras = moment.duration();
@@ -118,9 +104,8 @@ function actualizarHoras() {
   } else {
     divhoras.innerHTML = "00:00";
   }
-  divhoras.innerHTML += ` - ${
-    user.charAt(0).toUpperCase() + user.slice(1)
-  } - Cenas: ${Math.floor(totalHoras.hours() / 4)}`;
+  divhoras.innerHTML += ` - ${user.charAt(0).toUpperCase() + user.slice(1)
+    } - Cenas: ${Math.floor(totalHoras.hours() / 4)}`;
 }
 
 function horas(tiempo) {
@@ -134,8 +119,6 @@ function crearTarea() {
   renderizarLista(crearTabla(tasks), document.getElementById("divLista"));
   actualizarHoras();
 }
-
-////////////////////////////////////////////////////////
 
 function renderizarLista(lista, contenedor) {
   while (contenedor.hasChildNodes()) {
@@ -159,10 +142,13 @@ function crearThead(item) {
   tr.style.backgroundColor = "purple";
 
   for (const key in item) {
-    if (key !== "id") {
-      const th = document.createElement("th");
-      th.textContent = key;
-      tr.appendChild(th);
+    if (typeof (item[key]) !== "function") {
+
+      if (key !== "id") {
+        const th = document.createElement("th");
+        th.textContent = key;
+        tr.appendChild(th);
+      }
     }
   }
   thead.appendChild(tr);
@@ -174,12 +160,19 @@ function crearTbody(items) {
   items.forEach((item) => {
     const tr = document.createElement("tr");
     for (const key in item) {
-      if (key === "id") {
-        tr.setAttribute("id", item[key]);
-      } else {
-        const td = document.createElement("td");
-        td.textContent = item[key];
-        tr.appendChild(td);
+
+      if (typeof (item[key]) !== "function") {
+
+        if (key === "id") {
+          tr.setAttribute("id", item[key]);
+        } else {
+          const td = document.createElement("td");
+
+          td.innerHTML = item[key];
+          tr.appendChild(td);
+        }
+
+
       }
     }
 
@@ -200,7 +193,10 @@ function crearTbody(items) {
   return tbody;
 }
 
+////////////////////////////////////////////////////////
+
 function downloadXLSX(type, fn, dl) {
+  //sheetjs
   var elt = document.getElementById("tablax");
   var wb = XLSX.utils.table_to_book(elt, { sheet: "Libro1" });
   return dl
@@ -242,44 +238,39 @@ document.querySelector("#topdf").addEventListener("click", () => {
   downloadPDF();
 });
 
-var prueba = new Tarea();
-console.log(prueba.diferenciaNoche());
-console.log(prueba.diferenciaTemprano());
-console.log(prueba.diferenciaTotal());
-
 //function Tarea(fecha, horaEntrada, horaSalida, motivo, prefijo) {
 function Tarea() {
-  var fecha = document.querySelector("#pickerDateTime1").value;
-  var horaExtraEntrada = document.querySelector("#pickerDateTime2").value;
-  var horaEntrada = document.querySelector("#pickerDateTime3").value;
-  var horaSalida = document.querySelector("#pickerDateTime4").value;
-  var horaExtraSalida = document.querySelector("#pickerDateTime5").value;
-  var motivo = document.getElementById("motivoArea").value;
-  //var prefijo = prefijo.options[prefijo.selectedIndex].text;
+  const fecha = document.querySelector("#pickerDateTime1").value;
+  const horaExtraEntrada = document.querySelector("#pickerDateTime2").value;
+  const horaEntrada = document.querySelector("#pickerDateTime3").value;
+  const horaSalida = document.querySelector("#pickerDateTime4").value;
+  const horaExtraSalida = document.querySelector("#pickerDateTime5").value;
+  const motivo = document.getElementById("motivoArea").value;
+  const prefijoOp = document.getElementById("prefijo");
+  const prefijo = prefijoOp.options[prefijoOp.selectedIndex].text;
 
   this.id = new Date().getTime();
   this.dia = fecha;
-  this.horas = this.total;
-  this.horaEntrada = horaEntrada;
-  this.horaSalida = horaSalida;
+  this.horaEntrada = horaExtraEntrada;
+  this.horaSalida = horaExtraSalida;
   this.motivo = motivo;
   this.prefijo = prefijo;
 
-  this.diferenciaTemprano = function () {
+  this.diferenciaTemprano = () => {
     var extra = moment(horaExtraEntrada, "HH:mm");
     var entrada = moment(horaEntrada, "HH:mm");
     return horas(moment.duration(entrada.diff(extra)));
   };
 
-  this.diferenciaNoche = function () {
+  this.diferenciaNoche = () => {
     var extra = moment(horaExtraSalida, "HH:mm");
     var salida = moment(horaSalida, "HH:mm");
     return horas(moment.duration(extra.diff(salida)));
   };
 
   this.diferenciaTotal = function () {
-    var totalNoche = moment(this.diferenciaNoche(), "HH:mm");
     var totalTemprano = moment(this.diferenciaTemprano(), "HH:mm");
+    var totalNoche = moment(this.diferenciaNoche(), "HH:mm");
     return horas(moment.duration(totalTemprano._i).add(totalNoche._i));
   };
 }
