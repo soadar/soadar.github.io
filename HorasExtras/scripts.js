@@ -160,19 +160,14 @@ function crearTbody(items) {
   items.forEach((item) => {
     const tr = document.createElement("tr");
     for (const key in item) {
-
       if (typeof (item[key]) !== "function") {
-
         if (key === "id") {
           tr.setAttribute("id", item[key]);
         } else {
           const td = document.createElement("td");
-
           td.innerHTML = item[key];
           tr.appendChild(td);
         }
-
-
       }
     }
 
