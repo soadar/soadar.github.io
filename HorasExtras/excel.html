@@ -1,0 +1,66 @@
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+  </head>
+  <body>
+    <div id="navbar"><span>Red Stapler - SheetJS </span></div>
+    <div id="wrapper">
+      <button id="button-a">Create Excel1</button>
+    </div>
+
+    <div id="wrapper">
+      <button id="button-b">Create Excel2</button>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.js"></script>
+    <script
+      lang="javascript"
+      src="https://cdn.rawgit.com/SheetJS/js-xlsx/master/dist/xlsx.full.min.js"
+    ></script>
+    <!-- <script lang="javascript" src="FileSaver.min.js"></script> -->
+    <script>
+      var wb = XLSX.utils.book_new();
+      wb.Props = {
+        Title: "SheetJS Tutorial",
+        Subject: "Test",
+        Author: "Red Stapler",
+        CreatedDate: new Date(2017, 12, 19),
+      };
+
+      wb.SheetNames.push("Test Sheet");
+      var ws_data = [["hello", "world"]];
+      var ws = XLSX.utils.aoa_to_sheet(ws_data);
+      wb.Sheets["Test Sheet"] = ws;
+
+      var wbout = XLSX.write(wb, { bookType: "xlsx", type: "binary" });
+      function s2ab(s) {
+        var buf = new ArrayBuffer(s.length);
+        var view = new Uint8Array(buf);
+        for (var i = 0; i < s.length; i++) view[i] = s.charCodeAt(i) & 0xff;
+        return buf;
+      }
+
+      $("#button-a").click(function () {
+        XLSX.writeFile(wb, "Horas_Extras.xlsx");
+      });
+
+      /////////////////////////////////////////////////////////////////////////////////////////////
+
+      $("#button-b").click(function () {
+        var fs = require("fs");
+        var XLSX = require("xlsx");
+        var wb = XLSX.utils.book_new();
+        wb.Props = {
+          Title: "FileFomat",
+          Subject: "Developer Guide",
+        };
+
+        wb.SheetNames.push("Test Sheet");
+        var ws_data = [["hello", "world"]];
+        var ws = XLSX.utils.aoa_to_sheet(ws_data);
+        wb.Sheets["Test Sheet"] = ws;
+        var wbout = XLSX.write(wb, { bookType: "xlsx", type: "binary" });
+      });
+    </script>
+  </body>
+</html>
