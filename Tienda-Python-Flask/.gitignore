@@ -1,0 +1,8 @@
+# Byte-compiled / Optimized / Dll 
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environments
+env/
+.env
