@@ -3,16 +3,8 @@
   box-sizing: border-box;
 }
 
-sasa {
-  font-family: Arial, sans-serif;
-  display: flex;
-  /*justify-content: center; */ /* eje x / horizontal */
-  align-items: center; /* eje Y / vertical */
-  min-height: 100vh;
-}
-
 .form {
-  background-color: whitesmoke;
+  background-color: rgb(219, 213, 211);
   width: 90%;
   max-width: 400px;
   margin: 0 auto;
