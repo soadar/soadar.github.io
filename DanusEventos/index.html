@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Plantilla</title>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-sm bg-dark sticky-top" data-bs-theme="dark">
+        <div class="container-fluid ">
+            <div class="collapse navbar-collapse ">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item me-5">
+                        <a class="nav-link active" aria-current="page" href="#">Inicio</a>
+                    </li>
+                    <li class="nav-item me-5">
+                        <a class="nav-link" href="#">Galeria</a>
+                    </li>
+                    <li class="nav-item me-5">
+                        <a class="nav-link" href="./form.html">Contacto</a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div id="carouselExampleAutoplaying" class="carousel slide carousel-fade" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+                aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active" data-bs-interval="2000">
+                <img src="./images/1.jpg" height="600px" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item" data-bs-interval="2000">
+                <img src="./images/2.jpg" height="600px" class=" d-block w-100 " alt=" ...">
+            </div>
+            <div class="carousel-item" data-bs-interval="2000">
+                <img src="./images/3.jpg" height="600px" class="d-block w-100" alt="...">
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying"
+            data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying"
+            data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
+    <footer class="d-flex justify-content-between flex-wrap bg-dark p-4">
+
+
+        <div class="container">
+            <div class="row social-buttons container-fluid">
+
+                <div class="col-sm-4 ml-auto text-center">
+                    <a href="https://wa.me/5491150500147" target="blank" class="social-margin">
+                        <div class="social-icon facebook">
+                            <i class="fa-brands fa-facebook"></i>
+                        </div>
+                        <p>/DanusEventos</p>
+                    </a>
+                </div>
+                </a>
+
+                <div class="col-sm-4 mr-auto text-center">
+                    <a href="https://wa.me/5491150500147" target="blank" class="social-margin">
+                        <div class="social-icon instagram">
+                            <i class="fa-regular fa-envelope"></i>
+                        </div>
+                        <p>contact@yourdomain.com</p>
+                    </a>
+                </div>
+                <div class="col-sm-4 ml-auto text-center">
+                    <a href="https://wa.me/5491150500147" target="blank" class="social-margin">
+                        <div class="social-icon wp">
+                            <i class="fa-brands fa-instagram"></i>
+                        </div>
+                        <p>+5491155555555</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-8 col-sm-6 col-xs-12 ms-auto">
+            <p class="copyright-text">Copyright &copy; <span id="year"></span> All Rights Reserved by
+                <a href="#">RDS</a>.
+            </p>
+        </div>
+
+        <script src="./js/bootstrap.min.js"></script>
+        <script src="./js/scripts.js"></script>
+</body>
+
+</html>
