@@ -1,0 +1,173 @@
+* {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+@font-face {
+  font-family: Sedgwick;
+  src: url(../fonts/SedgwickAveDisplay-Regular.ttf);
+}
+
+a {
+  text-decoration: none;
+}
+
+p {
+  font-family: sedgwick;
+  text-align: center;
+}
+
+.box img {
+  height: 10vh;
+  margin-left: 25%;
+}
+
+header {
+  display: grid;
+  grid-template-columns: 20fr 100fr;
+  height: 10vh;
+  width: 100%;
+  padding-bottom: 5px;
+}
+
+.box_der {
+  display: flex;
+  justify-content: end;
+}
+
+header {
+  background-color: white;
+}
+
+navbar li {
+  list-style: none;
+  display: inline;
+  padding: 10px;
+}
+
+navbar a {
+  color: #cac9c9;
+  font-family: Sedgwick;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 5px;
+  background-color: #5e5c5d;
+}
+
+navbar a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.sticky {
+  position: fixed;
+  top: 0;
+}
+
+#contenido {
+  padding-top: 30px;
+}
+
+#portada {
+  margin: 50px auto;
+  width: auto;
+  margin: 20px auto;
+}
+
+#portada img {
+  width: 100%;
+  margin: 0;
+}
+
+h1 {
+  font-family: Sedgwick;
+  text-align: center;
+}
+
+.bloque1 .img_ropa img {
+  height: 300px;
+}
+
+.bloque1 {
+  display: flex;
+  justify-content: center;
+  column-gap: 5%;
+  /* background-color: blueviolet; */
+  margin-top: 5%;
+  flex-wrap: wrap;
+}
+
+.img_ropa * {
+  display: block;
+  text-align: center;
+  font-family: Sedgwick;
+}
+
+/* Style footer */
+
+footer {
+  padding: 15px 0 15px;
+  background-color: grey;
+}
+
+footer img {
+  height: 6vh;
+}
+
+footer .linea1 {
+  display: flex;
+  justify-content: center;
+  padding: 10px 0 10px;
+}
+
+footer .linea1 img {
+  padding: 0 50px;
+}
+
+footer .linea2 {
+  display: flex;
+  justify-content: space-around;
+  padding: 20px 0 10px;
+}
+
+.mapa {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+
+.linea1 img {
+  transition: all 0.2s ease-in-out;
+}
+
+.linea1 img:hover {
+  transform: scale(1.5);
+}
+
+#contenido {
+  margin-bottom: 50px;
+}
+
+.main {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 15vh;
+  justify-content: space-between;
+  margin-top: 30vh;
+}
+
+.main div img {
+  height: 300px;
+  border-radius: 8px;
+}
+
+footer a {
+  color: black;
+}
+
+.contacto:hover {
+  color: mediumspringgreen;
+}
+
+.contacto a:hover {
+  color: mediumspringgreen;
+}
