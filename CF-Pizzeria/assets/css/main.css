@@ -1,0 +1,200 @@
+/*
+1. !important
+2. Atributo Style en html
+
+Selectores
+
+1. Selectores por ID
+2. Selectores de clase, atributos y pseudo clases
+3. Selectores de tipo y pseudo elemento.
+*/
+/*
+Position: static (defecto) | relative | absolute | fixed | sticky
+relative, se puede mover con top, right, button y left
+fixed, relativo al viewport y no se mueve con el scroll
+absolut, relativo al contenedor mas cercano que este posicionado, lo afecta el scroll
+stiky, mezcla de fixed y aboslutd, dependiendo si se sale del vp
+*/
+/* https://animate.style/ */
+html {
+  font-family: "Mali", cursive;
+}
+
+.container {
+  background: rgb(2, 0, 36);
+  background: linear-gradient(
+    90deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(105, 9, 121, 1) 35%,
+    rgba(0, 212, 255, 1) 100%
+  );
+  height: 100vh;
+  /* width: 99vw; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contenido {
+  max-width: 960px;
+  width: 100%;
+  height: 80vh;
+  background: linear-gradient(
+    90deg,
+    rgb(63, 189, 105) 0%,
+    rgb(121, 165, 206) 35%,
+    rgb(123, 180, 168) 100%
+  );
+  /* box-shadow: horizontal, vertical, desenfoque, amplitud color; */
+  /* box-shadow: 0 3px 6px black; */
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0, 0.23);
+  border-radius: 8px;
+  position: relative;
+  padding: 1.8em;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+a {
+  text-decoration: none;
+  color: darkblue;
+}
+
+/* Pseudo clases, video 43 de css */
+a:hover {
+  color: gold; /*  Mouse encima */
+}
+
+a:visited {
+  opacity: 1; /* Links visitados */
+}
+
+a:active {
+  background: red; /* Cuando damos click, links o botones */
+}
+
+a:focus {
+  background: pink; /* selecciado (con tab por ej) */
+}
+
+.parrafo {
+  margin-top: 50px;
+  line-height: 1.8em;
+  font-weight: 200;
+}
+
+.tabla {
+  width: 100%;
+  border-spacing: 0;
+}
+
+.tabla td,
+.tabla th {
+  /* border: solid 1px; */
+  padding: 0.5em;
+  text-align: left;
+}
+
+th {
+  text-transform: uppercase;
+}
+
+.tabla tr:nth-child(even) {
+  background-color: dodgerblue;
+}
+
+.fa-solid {
+  color: burlywood;
+  padding: 2px;
+}
+
+.titulo {
+  /* border-style: dashed; */
+  /* border-bottom-style: solid;
+  border-width: 2px;
+  border-color: blue;
+  border-top-color: brown;*/
+  /* padding: arriba, derecha, abajo, izquierda; */
+  /* padding: arriba/abajo, derecha/izquierda; */
+  padding-bottom: 1em;
+  border-bottom: solid 2px brown;
+  text-align: center;
+}
+
+.titulo-item {
+  font-size: 2em;
+  padding-bottom: 1em;
+  border-bottom: solid 2px brown;
+}
+
+.posicion {
+  background-color: brown;
+  color: white;
+  /* padding: 1em 1em 1em 1em; */
+  padding: 10px;
+  margin-right: 0.5em;
+  border-radius: 25%;
+}
+
+.actions {
+  position: absolute;
+  top: 1em;
+  right: 1em;
+}
+
+.volver {
+  height: 40px;
+  width: 40px;
+  color: white;
+  border-radius: 50%;
+  background-color: blueviolet;
+  display: inline-block;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.direccion {
+  margin-top: ;
+  font-weight: bold;
+  color: blueviolet;
+  font-size: 1.2em;
+  display: inline-block;
+  margin-top: 1em;
+}
+
+.main-image {
+  float: left;
+  margin-right: 1em;
+  height: 200px;
+}
+
+img {
+  max-width: 100%;
+}
+
+@media (max-width: 600px) {
+  .contenido {
+    padding: 1em;
+  }
+  td {
+    display: block;
+    width: 100%;
+  }
+  td:nth-of-type(1) {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: blue;
+  }
+  th {
+    display: none;
+  }
+}
+
+@media (min-height: 550px) {
+  .contenido {
+    height: 500px;
+  }
+}
+/* @media print{} // cuando va a ser impresa */
