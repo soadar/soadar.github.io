@@ -33,7 +33,7 @@ links.forEach(function (link) {
         contenido.classList.add("animate__animated")
 
         setTimeout(() => {
-            location.href = "/";
+            location.href = "./index.html";
 
         }, 600);
         return false
