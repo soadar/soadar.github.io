@@ -33,7 +33,7 @@ links.forEach(function (link) {
         contenido.classList.add("animate__animated")
 
         setTimeout(() => {
-            location.href = "/index.html";
+            location.href = "/CF-Pizzeria";
 
         }, 600);
         return false
