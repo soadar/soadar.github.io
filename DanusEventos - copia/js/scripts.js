@@ -7,5 +7,6 @@ const form = document.getElementById("form");
 if (form) {
     form.addEventListener('submit', function (e) {
         e.preventDefault();
+        console.log("aa");
     })
 }

@@ -11,10 +11,10 @@ if (!JSON.parse(localStorage.getItem("user"))) {
 let user = JSON.parse(localStorage.getItem("user")) || [];
 let tasks = JSON.parse(localStorage.getItem("horas")) || [];
 
+console.log(tasks);
+
 if (localStorage.getItem("horas")) {
-  tasks.map((task) => {
-    crearTarea(task);
-  });
+  crearTarea()
 }
 
 let localTzName = moment.tz.guess();
