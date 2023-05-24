@@ -8,6 +8,10 @@
   height: 18rem;
 }
 
+footer * {
+  display: inline;
+}
+
 table {
   max-width: 500px;
 }
@@ -163,4 +167,8 @@ body {
   position: absolute;
   top: 0;
   left: 50px;
+}
+
+#carrusel {
+  width: 75%;
 }

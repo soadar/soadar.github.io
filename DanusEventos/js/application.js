@@ -1,6 +1,6 @@
 $(function () {
 
-    let nav = `
+    let navbar = `
     <nav class="navbar navbar-expand-sm bg-body-tertiary bg-dark " data-bs-theme="dark">
         <div class="container-fluid">
             <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -23,12 +23,54 @@ $(function () {
                     </li>
                 </ul>
             </div>
-
-
         </div>
     </nav >
     `
-    document.getElementById('navbar').innerHTML = nav;
+
+    let footer = `
+    <footer class="d-flex justify-content-between flex-wrap p-2 bg-dark">
+        <div class="container pt-3">
+            <div class="row social-buttons container-fluid">
+                <div class="col-sm-4 ml-auto text-center">
+                    <a href="https://www.facebook.com/DanusEventos" target="blank" class="social-margin">
+                        <div class="social-icon facebook">
+                            <i class="fa-brands fa-facebook"></i>
+                        </div>
+                        <p class="text-light">/DanusEventos</p>
+                    </a>
+                </div>
+                </a>
+
+                <div class="col-sm-4 mr-auto text-center">
+                    <a href="mailto:contact@yourdomain.com" target="blank" class="social-margin">
+                        <div class="social-icon instagram">
+                            <i class="fa-regular fa-envelope"></i>
+                        </div>
+                        <p class="text-light">contact@yourdomain.com</p>
+                    </a>
+                </div>
+                <div class="col-sm-4 ml-auto text-center">
+                    <a href="https://wa.me/5491150500147" target="blank" class="social-margin">
+                        <div class="social-icon wp">
+                            <i class="fa-brands fa-instagram"></i>
+                        </div>
+                        <p class="text-light">+5491155555555</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="container ">
+            <span class="copyright-text text-white-50">Copyright &copy; <span id="year"></span> Todos los derechos
+                reservados
+            </span>
+            <span class="float-end text-white-50">
+                Diseñado por <a href="#">RDS</a>.
+            </span>
+        </div>
+    </footer>
+    `
+    document.getElementById('navbar').innerHTML = navbar;
+    document.getElementById('footer').innerHTML = footer;
     //<img src="./images-portada/logo-mini.jpg" width="32" height="32">
     $('#inicio').on('click', function () {
         $('#content').load('portal.html')
