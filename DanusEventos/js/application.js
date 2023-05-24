@@ -47,7 +47,7 @@ $(function () {
             const producto = {
                 id: index,
                 nombre: 'producto' + index,
-                imagen: './images/' + index + ".jpg",
+                imagen: '/DanusEventos/images/' + index + ".jpg",
             };
             listaProductos.push(producto);
         }
