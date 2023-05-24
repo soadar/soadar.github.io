@@ -47,7 +47,7 @@ $(function () {
             const producto = {
                 id: index,
                 nombre: 'producto' + index,
-                imagen: '/images/' + index + ".jpg",
+                imagen: './images/' + index + ".jpg",
             };
             listaProductos.push(producto);
         }
@@ -100,7 +100,6 @@ $(function () {
     }
 
     $(".animated").on("click", function () {
-        console.log("jjj");
         $(this).toggleClass("pulse");
     });
 
@@ -133,7 +132,7 @@ $(function () {
         btnWp.onclick = () => {
             let productosParaWsp = listaDelUsuario.map((producto) => '* ' + producto.nombre);
             productosConFormatoAmigable = productosParaWsp.join('%0a')
-            console.log(productosConFormatoAmigable);
+            //console.log(productosConFormatoAmigable);
             let a = document.createElement('a');
             a.target = '_blank';
             a.href = 'https://wa.me/5491136825679?text=Me%20interesan%20los%20siguientes%20productos%0a%0a' + ' ' + productosConFormatoAmigable;
