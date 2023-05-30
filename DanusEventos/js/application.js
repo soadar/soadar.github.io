@@ -1,18 +1,14 @@
 $(function () {
 
     let navbar = `
-    <nav class="navbar navbar-expand-sm bg-body-tertiary bg-dark " data-bs-theme="dark">
+    <nav class="navbar bg-body-tertiary bg-dark" data-bs-theme="dark">
         <div class="container-fluid">
-            <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="navbar-collapse collapse justify-content-center" id="navbarNav">
-                <ul class="navbar-nav ">
-                    <li class="nav-item m-1">
+            <div  id="navbarNav" class="mx-auto">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex flex-row mb-3-center ">
+                    <li class="nav-item m-1 me-4">
                         <a class="nav-link" id="inicio">Inicio</a>
                     </li>
-                    <li class="nav-item m-1">
+                    <li class="nav-item m-1 me-4">
                         <a class="nav-link" id="productos">Productos</a>
                     </li>
                     <li class="nav-item m-1">

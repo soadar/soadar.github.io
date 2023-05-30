@@ -64,12 +64,6 @@ table {
   initial-value: 0turn;
 }
 
-html,
-body {
-  margin: 0;
-  height: 100%;
-}
-
 .social-buttons {
   display: inline-block;
   margin: 0 auto;
@@ -167,8 +161,42 @@ body {
   position: absolute;
   top: 0;
   left: 50px;
+  z-index: 100;
 }
 
 #carrusel {
   width: 75%;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  #logo {
+    left: 0;
+  }
+  #navbarNav {
+    margin-right: 0 !important;
+  }
+
+  #carrusel {
+    width: 100%;
+  }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+  #carrusel {
+    width: 50%;
+  }
 }
