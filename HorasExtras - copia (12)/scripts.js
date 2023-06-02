@@ -54,14 +54,14 @@ $("#pickerDateTime2").datetimepicker({
   step: 15,
 });
 $("#pickerDateTime3").datetimepicker({
-  timepicker: true,
+  timepicker: false,
   datepicker: false,
   value: "09:45",
   format: "HH:mm",
   step: 15,
 });
 $("#pickerDateTime4").datetimepicker({
-  timepicker: true,
+  timepicker: false,
   datepicker: false,
   value: "17:15",
   format: "HH:mm",
@@ -74,17 +74,6 @@ $("#pickerDateTime5").datetimepicker({
   format: "HH:mm",
   step: 15,
 });
-
-document.getElementById("habilitar").addEventListener("change", function () {
-  if (this.checked) {
-    console.log("Checkbox is checked..");
-    document.querySelector("#pickerDateTime3").disabled = false;
-    document.querySelector("#pickerDateTime4").disabled = false;
-  } else {
-    document.querySelector("#pickerDateTime3").disabled = true;
-    document.querySelector("#pickerDateTime4").disabled = true;
-  }
-})
 
 document.getElementById("form").addEventListener("submit", function (event) {
   event.preventDefault();
@@ -141,7 +130,6 @@ function renderizarLista(lista, contenedor) {
 function crearTabla(items) {
   const tabla = document.createElement("table");
   tabla.id = "tablax";
-  tabla.classList.add('mx-auto', 'table', 'table-primary', 'table-striped');
   tabla.appendChild(crearThead(items[0]));
   tabla.appendChild(crearTbody(items));
   //tabla.setAttribute("style", "border:1px solid black; border-collapse:collapse");
@@ -151,6 +139,7 @@ function crearTabla(items) {
 function crearThead(item) {
   const thead = document.createElement("thead");
   const tr = document.createElement("tr");
+  tr.style.backgroundColor = "purple";
 
   for (const key in item) {
     if (typeof (item[key]) !== "function") {
@@ -185,7 +174,6 @@ function crearTbody(items) {
     const button = document.createElement("button");
     button.innerHTML = "x";
     button.classList = "btnX";
-    button.classList.add('btnX', 'btn', 'btn-danger');
     button.onclick = () => {
       button.parentElement.remove();
       tasks = tasks.filter(
@@ -194,12 +182,7 @@ function crearTbody(items) {
       localStorage.setItem("horas", JSON.stringify(tasks));
       actualizarHoras();
     };
-    const td = document.createElement("td");
-    //td.style.backgroundColor = 'trasparent !important';
-
-    td.appendChild(button);
-    td.id = 'btnTd'
-    tr.appendChild(td);
+    tr.appendChild(button);
     tbody.appendChild(tr);
   });
   return tbody;

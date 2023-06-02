@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Horas Extras</title>
+  <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/jquery-datetimepicker@2.5.21/jquery.datetimepicker.min.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <div id="hero">
+    <!-- <input id="username" name="username" class="required" type="text" size="25" autocomplete="true"> -->
+    <section>
+      <h2>Horas Extras</h2>
+      <div id="settings">
+        <!-- <h4>Seleccionar</h4> -->
+
+        <div id="labels">
+          <label for=""></label>
+          <label id="fecha" for="">Fecha</label>
+          <label id="ingreso" for="">Hora de ingreso</label>
+          <label><input type="checkbox" id="habilitar" value="checkBox">Habilitar</label>
+          <label id="salida">Hora de salida</label>
+          <label id="motivo" for="">Motivo</label>
+          <label for=""></label>
+          <label id="prefijoSelect" for="">Prefijo</label>
+        </div>
+
+        <form id="form">
+          <input id="pickerDateTime1" type="button" class="select-1" />
+          <input id="pickerDateTime2" type="button" class="select-1" />
+          <input id="pickerDateTime3" type="button" class="select-2" disabled />
+          <input id="pickerDateTime4" type="button" class="select-2" disabled />
+          <input id="pickerDateTime5" type="button" class="select-1" />
+
+          <!-- <label for="NIC">Lenguaje</label> -->
+
+          <textarea id="motivoArea" class="select-3" minlength="1" rows="2" required></textarea>
+
+          <select class="select-1" name="prefijo" id="prefijo">
+            <option value="INC">IMP</option>
+            <option value="IMP">TPE</option>
+            <option value="IMP">INC</option>
+            <option value="IMP">TM</option>
+            <option value="IMP">TPI</option>
+            <option value="IMP">CON</option>
+          </select>
+
+          <input id="submit" type="submit" class="select-2" value="Agregar" />
+        </form>
+      </div>
+    </section>
+
+    <section id="botones">
+      <button id="toexcel" class="boton">Excel</button>
+      <button id="tojson" class="boton">Json</button>
+      <button id="topdf" class="boton">PDF</button>
+    </section>
+
+    <section id="listado">
+      <h2>Listado</h2>
+      <div id="divLista">
+      </div>
+    </section>
+
+    <footer>
+      <p>Horas totales: <span id="horas">00:00</span></p>
+    </footer>
+  </div>
+  <!------------------------------------------------------------>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js"
+    integrity="sha384-NaWTHo/8YCBYJ59830LTz/P4aQZK1sS0SneOgAvhsIl3zBu8r9RevNg5lHCHAuQ/"
+    crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/jspdf-autotable@2.3.2"></script>
+  <script type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.28/moment-timezone-with-data-10-year-range.min.js"></script>
+  <!-- <script
+    src="https://cdn.jsdelivr.net/npm/jquery-datetimepicker@2.5.21/build/jquery.datetimepicker.full.min.js"></script> -->
+  <script src="./jquery.datetimepicker.min.js"></script>
+  <script src="./scripts.js"></script>
+
+</body>
+
+</html>
