@@ -1,10 +1,11 @@
 //Default
 jQuery.datetimepicker.setLocale("es");
 
-var defaultDatetime = "2020-01-01T19:30:00.000Z"; //'2020-03-29 19:30';
+//var defaultDatetime = "2020-01-01T19:30:00.000Z"; //'2020-03-29 19:30';
 var pickerEntrada = ''
 var pickerSalida = ''
-
+var diaSeleccionado = ''
+const meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Novimebre", "Diciembre"];
 
 if (!JSON.parse(localStorage.getItem("user"))) {
   alert("Debe iniciar sesion primero");
@@ -48,7 +49,20 @@ $("#pickerDateTime1").datetimepicker({
   //   "Diciembre",
   // ],
   // dayOfWeek: ["Dom.", "Lun", "Mar", "Mier", "Jue", "Vier", "Sab"],
+  onChangeDateTime: function (dp, $input) {
+    diaSeleccionado = $input.val();
+    diaSeleccionado = new Date(diaSeleccionado)
+    console.log(diaSeleccionado);
 
+    //console.log(diaSeleccionado);
+    // if (diaSeleccionado.getDay() === 0 || diaSeleccionado.getDay() === 6) {
+    // }
+
+    // if (pickerEntrada !== '09:45') {
+    //   document.querySelector("#pickerDateTime4").disabled = true;
+    //   document.querySelector("#pickerDateTime5").disabled = true;
+    // }
+  }
 });
 $("#pickerDateTime2").datetimepicker({
   datepicker: false,
