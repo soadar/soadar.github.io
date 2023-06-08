@@ -14,22 +14,23 @@ let tasks = JSON.parse(localStorage.getItem("horas")) || [];
 console.log(tasks);
 
 if (localStorage.getItem("horas")) {
-  crearTarea()
+  crearTarea();
 }
 
 let localTzName = moment.tz.guess();
 $.datetimepicker.setDateFormatter("moment");
-
 
 $("#pickerDateTime1").datetimepicker({
   timepicker: false,
   format: "DD-MM-YYYY",
   value: new Date(),
   step: 15,
-  language: 'es',
-  locale: 'es',
-  minDate: '01-01-2023', formatDate: 'DD-MM-YYYY',
-  startDate: '01-01-2023', formatDate: 'DD-MM-YYYY',
+  language: "es",
+  locale: "es",
+  minDate: "01-01-2023",
+  formatDate: "DD-MM-YYYY",
+  startDate: "01-01-2023",
+  formatDate: "DD-MM-YYYY",
   // months: [
   //   "Enero",
   //   "Febrero",
@@ -84,7 +85,7 @@ document.getElementById("habilitar").addEventListener("change", function () {
     document.querySelector("#pickerDateTime3").disabled = true;
     document.querySelector("#pickerDateTime4").disabled = true;
   }
-})
+});
 
 document.getElementById("form").addEventListener("submit", function (event) {
   event.preventDefault();
@@ -92,7 +93,6 @@ document.getElementById("form").addEventListener("submit", function (event) {
   const tarea = new Tarea();
   var horas = tarea.diferenciaTotal();
   tarea.horas = horas;
-
 
   if (horas != "00:00") {
     tasks.push(tarea);
@@ -115,8 +115,9 @@ function actualizarHoras() {
   } else {
     divhoras.innerHTML = "00:00";
   }
-  divhoras.innerHTML += ` - ${user.charAt(0).toUpperCase() + user.slice(1)
-    } - Cenas: ${Math.floor(totalHoras.hours() / 4)}`;
+  divhoras.innerHTML += ` - ${
+    user.charAt(0).toUpperCase() + user.slice(1)
+  } - Cenas: ${Math.floor(totalHoras.hours() / 4)}`;
 }
 
 function horas(tiempo) {
@@ -141,7 +142,7 @@ function renderizarLista(lista, contenedor) {
 function crearTabla(items) {
   const tabla = document.createElement("table");
   tabla.id = "tablax";
-  tabla.classList.add('mx-auto', 'table', 'table-primary', 'table-striped');
+  tabla.classList.add("mx-auto", "table", "table-primary", "table-striped");
   tabla.appendChild(crearThead(items[0]));
   tabla.appendChild(crearTbody(items));
   //tabla.setAttribute("style", "border:1px solid black; border-collapse:collapse");
@@ -153,8 +154,7 @@ function crearThead(item) {
   const tr = document.createElement("tr");
 
   for (const key in item) {
-    if (typeof (item[key]) !== "function") {
-
+    if (typeof item[key] !== "function") {
       if (key !== "id") {
         const th = document.createElement("th");
         th.textContent = key;
@@ -171,7 +171,7 @@ function crearTbody(items) {
   items.forEach((item) => {
     const tr = document.createElement("tr");
     for (const key in item) {
-      if (typeof (item[key]) !== "function") {
+      if (typeof item[key] !== "function") {
         if (key === "id") {
           tr.setAttribute("id", item[key]);
         } else {
@@ -185,7 +185,7 @@ function crearTbody(items) {
     const button = document.createElement("button");
     button.innerHTML = "x";
     button.classList = "btnX";
-    button.classList.add('btnX', 'btn', 'btn-danger');
+    button.classList.add("btnX", "btn", "btn-danger");
     button.onclick = () => {
       button.parentElement.remove();
       tasks = tasks.filter(
@@ -198,7 +198,7 @@ function crearTbody(items) {
     //td.style.backgroundColor = 'trasparent !important';
 
     td.appendChild(button);
-    td.id = 'btnTd'
+    td.id = "btnTd";
     tr.appendChild(td);
     tbody.appendChild(tr);
   });
