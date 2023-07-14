@@ -40,9 +40,15 @@ createApp({
                     alert("Registro eliminado")
                     location.reload();
                 })
+        },
+        getFormattedDate(date) {
+            console.log(date);
+            if (date.indexOf("0000-00-00")) {
+                console.log("aaaa");
+                const d = new Date(1995, 11, 11);
+                return moment(d).format("DD-MM-YYYY");
+            }
         }
-
-
     },
 
 
