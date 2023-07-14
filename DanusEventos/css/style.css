@@ -40,7 +40,6 @@ table {
   -webkit-animation: bg-spin 15s linear infinite;
   animation: bg-spin 15s linear infinite;
 }
-
 @-webkit-keyframes bg-spin {
   to {
     --border-angle: 1turn;
@@ -63,7 +62,6 @@ table {
   inherits: true;
   initial-value: 0turn;
 }
-
 .social-buttons {
   display: inline-block;
   margin: 0 auto;
@@ -147,7 +145,7 @@ footer p,
 .row {
   color: grey;
 }
-
+/* 
 body {
   background: rgb(63, 94, 251);
   background: radial-gradient(
@@ -155,35 +153,46 @@ body {
     rgba(63, 94, 251, 1) 0%,
     rgba(252, 70, 107, 1) 100%
   );
+} */
+
+body {
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  height: 100vh;
 }
 
-#logo {
-  position: absolute;
-  top: 0;
-  left: 50px;
-  z-index: 100;
+#divLogo {
+  background-color: black;
 }
 
-#carrusel {
-  width: 75%;
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 /* Extra small devices (phones, 600px and down) */
-@media only screen and (max-width: 600px) {
-  #logo {
-    left: 0;
+@media only screen and (max-width: 500px) {
+  #footer * {
+    /* background-color: red; */
   }
   #navbarNav {
-    margin-right: 0 !important;
-  }
-
-  #carrusel {
-    width: 100%;
+    /* margin-right: 0 !important; */
   }
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
+  /* #footer * {
+    background-color: green;
+  } */
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
@@ -196,7 +205,117 @@ body {
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
-  #carrusel {
-    width: 50%;
+}
+
+/*  */
+
+#divLogo {
+  /* height: 100%;
+	width: 1000px; */
+  height: 200px;
+  background-image: url("../images-portada/danus-logo.jpg");
+  background-repeat: repeat-x;
+  background-size: 200px;
+  /* animation: 50s para infinite linear; */
+}
+
+@keyframes para {
+  100% {
+    background-position: -5000px 20%, -800px 95%, 500px 50%, 1000px 100%,
+      400px 0;
   }
+}
+
+/*  */
+#content {
+  height: 650px;
+}
+img {
+  width: 90%;
+  border-radius: 20%;
+}
+
+.containers {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.items {
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  animation: carouselAnim 50s infinite alternate linear;
+}
+
+.entrys {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+  width: 500px;
+  margin: 1em;
+  padding: 0.1em;
+  border-radius: 10px;
+}
+
+@media only screen and (max-width: 768px) {
+  .items {
+    animation: carouselAnim 35s infinite alternate linear;
+  }
+
+  @keyframes carouselAnim {
+    from {
+      transform: translate(0, 0);
+    }
+    to {
+      transform: translate(calc(-100% + (2 * 300px)));
+    }
+  }
+}
+
+.entrys p {
+  text-align: center;
+  padding: 1em;
+}
+
+.name {
+  font-weight: bold;
+}
+
+@keyframes carouselAnim {
+  from {
+    transform: translate(0, 0);
+  }
+  to {
+    transform: translate(calc(-100% + (5 * 300px)));
+  }
+}
+
+.containers .faders {
+  width: 100%;
+  position: absolute;
+  height: 100%;
+}
+
+.faders .right,
+.faders .left {
+  background: linear-gradient(
+    to right,
+    rgba(245, 245, 245, 1) 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  width: 15%;
+  height: 100%;
+  position: absolute;
+  z-index: 200;
+}
+
+.right {
+  right: 0;
+  background: linear-gradient(
+    to left,
+    rgba(245, 245, 245, 1) 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
 }

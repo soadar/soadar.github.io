@@ -2,48 +2,45 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Danus Eventos</title>
-    <!-- <link rel="stylesheet" href="css/bootstrap.min.css"> -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="./css/bootstrap.min.css">
-    <link rel="stylesheet" href="./css/style.css">
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            $('#content').load('portal.html');
-        });
-    </script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Danus Eventos</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="./css/style.css" />
+  <link rel="stylesheet" href="./css/bootstrap.min.css" />
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      $("#content").load("portal.html");
+    });
+  </script>
 </head>
 
-<body class="container-fluid ">
+<body class="container-fluid">
+  <div class="row" id="navbar"></div>
 
-    <div class="row" id="navbar"></div>
+  <div id="divLogo" class="row"></div>
 
-    <img id="logo" class="rounded-4" src="./images-portada/logo-mini.jpg" width="128" height="128">
-
-    <div class="offcanvas offcanvas-start text-bg-dark" data-bs-scroll="true" tabindex="-1"
-        id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
-        <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Carrito</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body">
-            <p>Lista de productos.</p>
-            <div id="divLista"></div>
-        </div>
+  <div class="offcanvas offcanvas-start text-bg-dark" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions"
+    aria-labelledby="offcanvasWithBothOptionsLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">
+        Carrito
+      </h5>
+      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
-
-    <div class="row" id="content"></div>
-
-    <div class="container" id="footer">
+    <div class="offcanvas-body">
+      <p>Lista de productos.</p>
+      <div id="divLista"></div>
     </div>
+  </div>
 
+  <div class="container" id="content"></div>
 
-    <script src="js/jquery-3.7.0.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/application.js"></script>
+  <div class="row" id="footer"></div>
 
+  <script src="js/jquery-3.7.0.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/application.js"></script>
 </body>
 
 </html>
