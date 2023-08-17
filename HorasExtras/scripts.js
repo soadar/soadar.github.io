@@ -2,6 +2,8 @@
 jQuery.datetimepicker.setLocale("es");
 
 var defaultDatetime = "2020-01-01T19:30:00.000Z"; //'2020-03-29 19:30';
+var pickerEntrada = "";
+var pickerSalida = "";
 
 if (!JSON.parse(localStorage.getItem("user"))) {
   alert("Debe iniciar sesion primero");
@@ -11,7 +13,7 @@ if (!JSON.parse(localStorage.getItem("user"))) {
 let user = JSON.parse(localStorage.getItem("user")) || [];
 let tasks = JSON.parse(localStorage.getItem("horas")) || [];
 
-console.log(tasks);
+//console.log(tasks);
 
 if (localStorage.getItem("horas")) {
   crearTarea();
@@ -29,7 +31,7 @@ $("#pickerDateTime1").datetimepicker({
   locale: "es",
   minDate: "01-01-2023",
   formatDate: "DD-MM-YYYY",
-  startDate: "01-01-2023",
+  startDate: new Date(),
   formatDate: "DD-MM-YYYY",
   // months: [
   //   "Enero",
@@ -46,6 +48,11 @@ $("#pickerDateTime1").datetimepicker({
   //   "Diciembre",
   // ],
   // dayOfWeek: ["Dom.", "Lun", "Mar", "Mier", "Jue", "Vier", "Sab"],
+  onChangeDateTime: function (dp, $input) {
+    if (dp.getDay() === 0 || dp.getDay() === 6) {
+      document.getElementById("doble").checked = true;
+    }
+  },
 });
 $("#pickerDateTime2").datetimepicker({
   datepicker: false,
@@ -60,6 +67,13 @@ $("#pickerDateTime3").datetimepicker({
   value: "09:45",
   format: "HH:mm",
   step: 15,
+  onChangeDateTime: function (dp, $input) {
+    pickerEntrada = $input.val();
+    if (pickerEntrada !== "09:45") {
+      document.querySelector("#pickerDateTime4").disabled = true;
+      document.querySelector("#pickerDateTime5").disabled = true;
+    }
+  },
 });
 $("#pickerDateTime4").datetimepicker({
   timepicker: true,
@@ -67,6 +81,13 @@ $("#pickerDateTime4").datetimepicker({
   value: "17:15",
   format: "HH:mm",
   step: 15,
+  onChangeDateTime: function (dp, $input) {
+    pickerSalida = $input.val();
+    if (pickerSalida !== "17:15") {
+      document.querySelector("#pickerDateTime2").disabled = true;
+      document.querySelector("#pickerDateTime3").disabled = true;
+    }
+  },
 });
 $("#pickerDateTime5").datetimepicker({
   datepicker: false,
@@ -78,16 +99,29 @@ $("#pickerDateTime5").datetimepicker({
 
 document.getElementById("habilitar").addEventListener("change", function () {
   if (this.checked) {
-    console.log("Checkbox is checked..");
     document.querySelector("#pickerDateTime3").disabled = false;
     document.querySelector("#pickerDateTime4").disabled = false;
   } else {
-    document.querySelector("#pickerDateTime3").disabled = true;
-    document.querySelector("#pickerDateTime4").disabled = true;
+    reset();
   }
 });
 
-document.getElementById("form").addEventListener("submit", function (event) {
+function reset() {
+  document.querySelector("#pickerDateTime2").disabled = false;
+  document.querySelector("#pickerDateTime3").disabled = true;
+  document.querySelector("#pickerDateTime4").disabled = true;
+  document.querySelector("#pickerDateTime5").disabled = false;
+  document.querySelector("#pickerDateTime5").value = new Date();
+  document.querySelector("#pickerDateTime5").value = "09:45";
+  document.querySelector("#pickerDateTime5").value = "09:45";
+  document.querySelector("#pickerDateTime5").value = "17:15";
+  document.querySelector("#pickerDateTime5").value = "17:15";
+}
+
+document.getElementById("reset").addEventListener("click", reset);
+
+
+document.querySelector("form").addEventListener("submit", function (event) {
   event.preventDefault();
 
   const tarea = new Tarea();
@@ -111,13 +145,18 @@ function actualizarHoras() {
     tasks.map((task) => {
       totalHoras.add(moment.duration(task.horas.toString()));
     });
+
+    ////////////////////////////////////////////////
+    var minutes = (totalHoras.hours() * 60) + totalHoras.minutes();
+    console.log(minutes);
+    ////////////////////////////////////////////////
+
     divhoras.innerHTML = horas(totalHoras);
   } else {
     divhoras.innerHTML = "00:00";
   }
-  divhoras.innerHTML += ` - ${
-    user.charAt(0).toUpperCase() + user.slice(1)
-  } - Cenas: ${Math.floor(totalHoras.hours() / 4)}`;
+  divhoras.innerHTML += ` - ${user.charAt(0).toUpperCase() + user.slice(1)
+    } - Cenas: ${Math.floor(totalHoras.hours() / 4)}`;
 }
 
 function horas(tiempo) {
@@ -142,7 +181,13 @@ function renderizarLista(lista, contenedor) {
 function crearTabla(items) {
   const tabla = document.createElement("table");
   tabla.id = "tablax";
-  tabla.classList.add("mx-auto", "table", "table-primary", "table-striped");
+  tabla.classList.add(
+    "mx-auto",
+    "table",
+    "table-primary",
+    "table-striped",
+    "text-center"
+  );
   tabla.appendChild(crearThead(items[0]));
   tabla.appendChild(crearTbody(items));
   //tabla.setAttribute("style", "border:1px solid black; border-collapse:collapse");
@@ -187,9 +232,9 @@ function crearTbody(items) {
     button.classList = "btnX";
     button.classList.add("btnX", "btn", "btn-danger");
     button.onclick = () => {
-      button.parentElement.remove();
+      button.parentElement.parentElement.remove();
       tasks = tasks.filter(
-        (task) => task.id !== parseInt(button.parentNode.id)
+        (task) => task.id !== parseInt(button.parentNode.parentNode.id)
       );
       localStorage.setItem("horas", JSON.stringify(tasks));
       actualizarHoras();
@@ -258,15 +303,32 @@ function Tarea() {
   const horaSalida = document.querySelector("#pickerDateTime4").value;
   const horaExtraSalida = document.querySelector("#pickerDateTime5").value;
   const motivo = document.getElementById("motivoArea").value;
-  const prefijoOp = document.getElementById("prefijo");
-  const prefijo = prefijoOp.options[prefijoOp.selectedIndex].text;
+  const prefijo = document.getElementById("prefijo").value;
+  const doble = document.getElementById("doble");
+  const habilitar = document.getElementById("habilitar");
 
   this.id = new Date().getTime();
   this.dia = fecha;
   this.horaEntrada = horaExtraEntrada;
   this.horaSalida = horaExtraSalida;
+  this.simpleDoble = !doble.checked ? "Simple" : "Doble";
   this.motivo = motivo;
   this.prefijo = prefijo;
+
+  //pickerEntrada
+  //pickerSalida
+  if (!habilitar.checked) {
+    this.horaEntrada = horaExtraEntrada;
+    this.horaSalida = horaExtraSalida;
+  } else {
+    if (horaEntrada !== "09:45") {
+      this.horaEntrada = horaExtraEntrada;
+      this.horaSalida = horaEntrada;
+    } else if (horaSalida !== "17:45") {
+      this.horaEntrada = horaExtraEntrada;
+      this.horaSalida = horaSalida;
+    }
+  }
 
   this.diferenciaTemprano = () => {
     var extra = moment(horaExtraEntrada, "HH:mm");
