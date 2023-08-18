@@ -140,23 +140,27 @@ document.querySelector("form").addEventListener("submit", function (event) {
 function actualizarHoras() {
   let totalHoras = moment.duration();
   let divhoras = document.getElementById("horas");
+  divhoras.innerHTML = `${user.charAt(0).toUpperCase() + user.slice(1)} - Horas totales: `
 
   if (localStorage.getItem("horas")) {
     tasks.map((task) => {
       totalHoras.add(moment.duration(task.horas.toString()));
     });
-
     ////////////////////////////////////////////////
     var minutes = (totalHoras.hours() * 60) + totalHoras.minutes();
-    console.log(minutes);
     ////////////////////////////////////////////////
-
-    divhoras.innerHTML = horas(totalHoras);
+    divhoras.innerHTML += horas(totalHoras);
   } else {
-    divhoras.innerHTML = "00:00";
+    divhoras.innerHTML += "00:00";
   }
-  divhoras.innerHTML += ` - ${user.charAt(0).toUpperCase() + user.slice(1)
-    } - Cenas: ${Math.floor(totalHoras.hours() / 4)}`;
+  //divhoras.innerHTML += ` - ${user.charAt(0).toUpperCase() + user.slice(1)} - Cenas: ${Math.floor(totalHoras.hours() / 4)}`;
+  //divhoras.innerHTML += ` - ${user.charAt(0).toUpperCase() + user.slice(1)}`;
+  const cenas = minutes >= 255 && minutes < 600 ? 1 : minutes >= 600 ? 2 : 0;
+  divhoras.innerHTML += ` - Cenas: ${cenas}`;
+  const francos = Math.floor(minutes / 450);
+  if (francos) divhoras.innerHTML += ` - Francos: ${francos}`
+  //console.log((minutes / 450).toFixed(1));
+
 }
 
 function horas(tiempo) {
